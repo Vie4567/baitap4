@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: my-mysql-bt4
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123        
+      MYSQL_DATABASE: mydb               
+      MYSQL_USER: user                   
+      MYSQL_PASSWORD: pass123            
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      
+  tomcat:
+    image: tomcat:10.1-jdk17
+    container_name: my-tomcat-bt4
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./target/bt4-0.0.1-SNAPSHOT.war:/usr/local/tomcat/webapps/bt4.war
+      
+volumes:
+  mysql_data:
