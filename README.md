@@ -1,5 +1,10 @@
-Tạo docker mySQL
+`Tạo docker mySQL
 docker compose -f mySQL.yaml up -d --build
+
+`Run
+mvn clean package
+docker compose -f mySQL.yaml up -d
+
 
 Truy cập vào database
 docker exec -it my-mysql-bt4 mysql -uuser -ppass123 mydb
